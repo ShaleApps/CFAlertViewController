@@ -748,7 +748,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             // Set Content
             titleSubtitleCell?.setTitle(titleString, titleColor: titleColor, titleFont: titleFont, subtitle: messageString, subtitleColor: messageColor, subtitleFont: messageFont, alignment: textAlignment!)
             // Set Content Margin
-            titleSubtitleCell?.contentTopMargin = 8.0
+            titleSubtitleCell?.contentTopMargin = 16.0
             titleSubtitleCell?.contentBottomMargin = 0.0
 
             

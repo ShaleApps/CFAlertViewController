@@ -91,7 +91,7 @@ extension CFAlertPopupTransition: UIViewControllerAnimatedTransitioning   {
                     
                     // Background
                     if alertViewController.backgroundStyle == .blur    {
-                        alertViewController.backgroundBlurView?.alpha = 0.5
+                        alertViewController.backgroundBlurView?.alpha = 1.0
                     }
                     alertViewController.backgroundColorView?.alpha = 1.0
                     

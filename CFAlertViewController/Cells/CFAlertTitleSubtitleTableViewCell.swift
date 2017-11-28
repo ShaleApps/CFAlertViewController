@@ -10,17 +10,13 @@ import UIKit
 
 
 public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
-    
-    // MARK: - Declarations
-    
-    
-    // MARK: - Variables
-    // MARK: Public
     public static func identifier() -> String    {
         return String(describing: CFAlertTitleSubtitleTableViewCell.self)
     }
+    
     @IBOutlet public var titleLabel: UILabel?
     @IBOutlet public var subtitleLabel: UILabel?
+    
     public var contentTopMargin: CGFloat = 0.0 {
         didSet {
             // Update Constraint
@@ -29,6 +25,7 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
             layoutIfNeeded()
         }
     }
+    
     public var contentBottomMargin: CGFloat = 0.0 {
         didSet {
             // Update Constraint
@@ -37,6 +34,7 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
             layoutIfNeeded()
         }
     }
+    
     public var contentLeadingSpace: CGFloat = 0.0 {
         didSet {
             // Update Constraint Values
@@ -54,7 +52,6 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
     @IBOutlet private weak var subtitleLabelTopConstraint: NSLayoutConstraint?
     @IBOutlet private weak var subtitleLeadingSpaceConstraint: NSLayoutConstraint?
     @IBOutlet private weak var subtitleLabelBottomConstraint: NSLayoutConstraint?
-    
     
     // MARK: Initialization Methods
     public override func awakeFromNib() {
@@ -76,7 +73,6 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
     }
     
     internal func basicInitialisation() {
-        
         // Reset Text and Color
         titleLabel?.text = nil
         subtitleLabel?.text = nil
@@ -85,7 +81,6 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
         contentLeadingSpace = 20.0;
     }
     
-    
     // MARK: - Layout Methods
     override public func layoutSubviews() {
         super.layoutIfNeeded()
@@ -93,16 +88,17 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
         contentView.layoutIfNeeded()
     }
     
-    
     // MARK: Helper Methods
-    public func setTitle(_ title: String?, titleColor: UIColor?, subtitle: String?, subtitleColor: UIColor?, alignment: NSTextAlignment) {
+    public func setTitle(_ title: String?, titleColor: UIColor?, titleFont: UIFont?, subtitle: String?, subtitleColor: UIColor?, subtitleFont: UIFont?, alignment: NSTextAlignment) {
         
         // Set Cell Text Fonts & Colors
         titleLabel?.text = title
         titleLabel?.textColor = titleColor
+        titleLabel?.font = titleFont
         titleLabel?.textAlignment = alignment
         subtitleLabel?.text = subtitle
         subtitleLabel?.textColor = subtitleColor
+        subtitleLabel?.font = subtitleFont
         subtitleLabel?.textAlignment = alignment
         
         // Update Constraints
@@ -128,7 +124,7 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
         else {
             titleLabelBottomConstraint?.isActive = false
             subtitleLabelTopConstraint?.isActive = false
-            titleSubtitleVerticalSpacingConstraint?.constant = 5.0
+            titleSubtitleVerticalSpacingConstraint?.constant = 16.0
         }
     }
 }

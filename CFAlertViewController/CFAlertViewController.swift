@@ -184,8 +184,10 @@ open class CFAlertViewController: UIViewController    {
     // MARK: Private / Internal
     internal var titleString: String?
     internal var titleColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_TITLE_COLOR()
+    internal var titleFont: UIFont?
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
+    internal var messageFont: UIFont?
     internal var actionList = [CFAlertAction]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
@@ -234,8 +236,10 @@ open class CFAlertViewController: UIViewController    {
         
         return CFAlertViewController.alertController(title: title,
                                                      titleColor: nil,
+                                                     titleFont: nil,
                                                      message: message,
                                                      messageColor: nil,
+                                                     messageFont: nil,
                                                      textAlignment: textAlignment,
                                                      preferredStyle: preferredStyle,
                                                      headerView: nil,
@@ -245,8 +249,10 @@ open class CFAlertViewController: UIViewController    {
     
     @objc public class func alertController(title: String?,
                                             titleColor: UIColor?,
+                                            titleFont: UIFont?,
                                             message: String?,
                                             messageColor: UIColor?,
+                                            messageFont: UIFont?,
                                             textAlignment: NSTextAlignment,
                                             preferredStyle: CFAlertControllerStyle,
                                             headerView: UIView?,
@@ -256,8 +262,10 @@ open class CFAlertViewController: UIViewController    {
         // Create New Instance Of Alert Controller
         return CFAlertViewController.init(title: title,
                                           titleColor: titleColor,
+                                          titleFont: titleFont,
                                           message: message,
                                           messageColor: messageColor,
+                                          messageFont: messageFont,
                                           textAlignment: textAlignment,
                                           preferredStyle: preferredStyle,
                                           headerView: headerView,
@@ -274,8 +282,10 @@ open class CFAlertViewController: UIViewController    {
         // Create New Instance Of Alert Controller
         self.init(title: title,
                   titleColor: nil,
+                  titleFont: UIFont(),
                   message: message,
                   messageColor: nil,
+                  messageFont: UIFont(),
                   textAlignment: textAlignment,
                   preferredStyle: preferredStyle,
                   headerView: nil,
@@ -285,8 +295,10 @@ open class CFAlertViewController: UIViewController    {
     
     @objc public convenience init(title: String?,
                                   titleColor: UIColor?,
+                                  titleFont: UIFont?,
                                   message: String?,
                                   messageColor: UIColor?,
+                                  messageFont: UIFont?,
                                   textAlignment: NSTextAlignment,
                                   preferredStyle: CFAlertControllerStyle,
                                   headerView: UIView?,
@@ -307,11 +319,13 @@ open class CFAlertViewController: UIViewController    {
         if let titleColor = titleColor {
             self.titleColor = titleColor
         }
+        self.titleFont = titleFont
         
         messageString = message
         if let messageColor = messageColor {
             self.messageColor = messageColor
         }
+        self.messageFont = messageFont
         
         self.textAlignment = textAlignment
         setHeaderView(headerView, shouldUpdateContainerFrame: false, withAnimation: false)
@@ -387,10 +401,10 @@ open class CFAlertViewController: UIViewController    {
             containerView?.layer.cornerRadius = 0.0
         }
         else if preferredStyle == .alert    {
-            containerView?.layer.cornerRadius = 10.0
+            containerView?.layer.cornerRadius = 4.0
         }
         else if preferredStyle == .actionSheet   {
-            containerView?.layer.cornerRadius = 10.0
+            containerView?.layer.cornerRadius = 4.0
         }
         
         // Add Tap Gesture Recognizer On View
@@ -732,15 +746,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
             let titleSubtitleCell: CFAlertTitleSubtitleTableViewCell? = (cell as? CFAlertTitleSubtitleTableViewCell)
             // Set Content
-            titleSubtitleCell?.setTitle(titleString, titleColor: titleColor, subtitle: messageString, subtitleColor: messageColor, alignment: textAlignment!)
+            titleSubtitleCell?.setTitle(titleString, titleColor: titleColor, titleFont: titleFont, subtitle: messageString, subtitleColor: messageColor, subtitleFont: messageFont, alignment: textAlignment!)
             // Set Content Margin
-            titleSubtitleCell?.contentTopMargin = 20.0
-            if self.actionList.count <= 0 {
-                titleSubtitleCell?.contentBottomMargin = 20.0
-            }
-            else {
-                titleSubtitleCell?.contentBottomMargin = 0.0
-            }
+            titleSubtitleCell?.contentTopMargin = 8.0
+            titleSubtitleCell?.contentBottomMargin = 0.0
+
             
         case 1:
             // Get Action Cell Instance
@@ -752,12 +762,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             actionCell?.action = self.actionList[indexPath.row]
             // Set Top Margin For First Action
             if indexPath.row == 0 {
-                if let titleString = titleString, let messageString = messageString, (!titleString.isEmpty && !messageString.isEmpty)   {
-                    actionCell?.actionButtonTopMargin = 12.0
-                }
-                else {
-                    actionCell?.actionButtonTopMargin = 20.0
-                }
+                actionCell?.actionButtonTopMargin = 24.0
             }
             else    {
                 actionCell?.actionButtonTopMargin = 0.0
@@ -767,10 +772,10 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
                 if indexPath.row > 0    {
                     actionCell?.actionButtonTopMargin = 0.0
                 }
-                actionCell?.actionButtonBottomMargin = 20.0
+                actionCell?.actionButtonBottomMargin = 24.0
             }
             else {
-                actionCell?.actionButtonBottomMargin = 10.0
+                actionCell?.actionButtonBottomMargin = 24.0
             }
             
         default:

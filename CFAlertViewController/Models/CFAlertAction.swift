@@ -29,15 +29,16 @@ open class CFAlertAction: NSObject, NSCopying {
     
     // MARK: - Variables
     @objc public var title: String?
+    @objc public var font: UIFont?
     @objc public var style: CFAlertActionStyle = .Default
     @objc public var alignment: CFAlertActionAlignment = .justified
     @objc public var backgroundColor: UIColor?
     @objc public var textColor: UIColor?
     @objc public var handler: CFAlertActionHandlerBlock?
     
-    
     // MARK: - Initialisation Method
     @objc public class func action(title: String?,
+                                   font: UIFont?,
                                    style: CFAlertActionStyle,
                                    alignment: CFAlertActionAlignment,
                                    backgroundColor: UIColor?,
@@ -45,6 +46,7 @@ open class CFAlertAction: NSObject, NSCopying {
                                    handler: CFAlertActionHandlerBlock?) -> CFAlertAction  {
         
         return CFAlertAction.init(title: title,
+                                  font: font,
                                   style: style,
                                   alignment: alignment,
                                   backgroundColor: backgroundColor,
@@ -53,6 +55,7 @@ open class CFAlertAction: NSObject, NSCopying {
     }
     
     @objc public convenience init(title: String?,
+                                  font: UIFont?,
                                   style: CFAlertActionStyle,
                                   alignment: CFAlertActionAlignment,
                                   backgroundColor: UIColor?,
@@ -64,6 +67,7 @@ open class CFAlertAction: NSObject, NSCopying {
         
         // Set Alert Properties
         self.title = title
+        self.font = font
         self.style = style
         self.alignment = alignment
         self.backgroundColor = backgroundColor
@@ -75,6 +79,7 @@ open class CFAlertAction: NSObject, NSCopying {
     // MARK: - NSCopying
     public func copy(with zone: NSZone? = nil) -> Any {
         return CFAlertAction.init(title: title,
+                                  font: font,
                                   style: style,
                                   alignment: alignment,
                                   backgroundColor: backgroundColor,

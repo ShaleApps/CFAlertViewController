@@ -775,7 +775,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
                 actionCell?.actionButtonBottomMargin = 24.0
             }
             else {
-                actionCell?.actionButtonBottomMargin = 24.0
+                actionCell?.actionButtonBottomMargin = 16.0
             }
             
         default:

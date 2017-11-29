@@ -188,6 +188,7 @@ open class CFAlertViewController: UIViewController    {
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var messageFont: UIFont?
+    internal var shadowColor: UIColor?
     internal var actionList = [CFAlertAction]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
@@ -241,6 +242,7 @@ open class CFAlertViewController: UIViewController    {
                                                      messageColor: nil,
                                                      messageFont: nil,
                                                      textAlignment: textAlignment,
+                                                     shadowColor: nil,
                                                      preferredStyle: preferredStyle,
                                                      headerView: nil,
                                                      footerView: nil,
@@ -254,6 +256,7 @@ open class CFAlertViewController: UIViewController    {
                                             messageColor: UIColor?,
                                             messageFont: UIFont?,
                                             textAlignment: NSTextAlignment,
+                                            shadowColor: UIColor?,
                                             preferredStyle: CFAlertControllerStyle,
                                             headerView: UIView?,
                                             footerView: UIView?,
@@ -267,6 +270,7 @@ open class CFAlertViewController: UIViewController    {
                                           messageColor: messageColor,
                                           messageFont: messageFont,
                                           textAlignment: textAlignment,
+                                          shadowColor: shadowColor,
                                           preferredStyle: preferredStyle,
                                           headerView: headerView,
                                           footerView: footerView,
@@ -287,6 +291,7 @@ open class CFAlertViewController: UIViewController    {
                   messageColor: nil,
                   messageFont: UIFont(),
                   textAlignment: textAlignment,
+                  shadowColor: nil,
                   preferredStyle: preferredStyle,
                   headerView: nil,
                   footerView: nil,
@@ -300,6 +305,7 @@ open class CFAlertViewController: UIViewController    {
                                   messageColor: UIColor?,
                                   messageFont: UIFont?,
                                   textAlignment: NSTextAlignment,
+                                  shadowColor: UIColor?,
                                   preferredStyle: CFAlertControllerStyle,
                                   headerView: UIView?,
                                   footerView: UIView?,
@@ -328,6 +334,9 @@ open class CFAlertViewController: UIViewController    {
         self.messageFont = messageFont
         
         self.textAlignment = textAlignment
+        
+        self.shadowColor = shadowColor
+        
         setHeaderView(headerView, shouldUpdateContainerFrame: false, withAnimation: false)
         setFooterView(footerView, shouldUpdateContainerFrame: false, withAnimation: false)
         dismissHandler = dismiss
@@ -406,6 +415,12 @@ open class CFAlertViewController: UIViewController    {
         else if preferredStyle == .actionSheet   {
             containerView?.layer.cornerRadius = 4.0
         }
+        
+        containerView?.layer.shadowColor = shadowColor?.cgColor ?? UIColor.clear.cgColor
+        containerView?.layer.shadowRadius = 10.0
+        containerView?.layer.shadowOpacity = 0.5
+        containerView?.layer.shadowOffset = CGSize(width: 0, height: 0)
+        containerView?.layer.masksToBounds = false
         
         // Add Tap Gesture Recognizer On View
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewDidTap))

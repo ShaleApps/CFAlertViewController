@@ -182,7 +182,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
     
     internal func basicInitialisation() {
         // Set Action Button Properties
-        actionButton?.layer.cornerRadius = 6.0
+        actionButton?.layer.cornerRadius = 4.0
         actionButton?.pushTransformScaleFactor = 0.9
     }
     

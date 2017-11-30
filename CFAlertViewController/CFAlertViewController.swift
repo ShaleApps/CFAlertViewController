@@ -715,8 +715,6 @@ open class CFAlertViewController: UIViewController    {
         
         // Remove Dismiss Handler
         dismissHandler = nil
-        
-        print("Popup Dealloc")
     }
 }
 

@@ -147,6 +147,11 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                 
                 // Set Title
                 actionButton?.setTitle(self.action?.title, for: .normal)
+                
+                actionButton?.titleLabel?.layer.shadowColor = UIColor.darkGray.cgColor
+                actionButton?.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 1)
+                actionButton?.titleLabel?.layer.shadowOpacity = 0.1
+                actionButton?.titleLabel?.layer.shadowRadius = 1
             }
             else    {
                 // Set Blank Title

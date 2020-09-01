@@ -384,12 +384,12 @@ open class CFAlertViewController: UIViewController    {
         
         // Register For Keyboard Notification Observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:
-            NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         // Text Field & Text View Notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: NSNotification.Name.UITextViewTextDidBeginEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: UITextField.textDidBeginEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
         
         // Register Cells For Table
         let actionCellNib = UINib(nibName: CFAlertActionTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionTableViewCell.self))
@@ -638,7 +638,7 @@ open class CFAlertViewController: UIViewController    {
         
         let info: [AnyHashable: Any]? = notification.userInfo
         if let info = info  {
-            if let kbRect = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            if let kbRect = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
                 if let viewRect = self.view.window?.convert(self.view.frame, from: self.view)   {
                     let intersectRect: CGRect = kbRect.intersection(viewRect)
                     if intersectRect.size.height > 0.0 {
@@ -804,11 +804,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     

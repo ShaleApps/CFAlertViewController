@@ -659,7 +659,7 @@ open class CFAlertViewController: UIViewController    {
         
         let info: [AnyHashable: Any]? = notification.userInfo
         if let info = info  {
-            if let kbRect = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            if let kbRect = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
                 if let viewRect = self.view.window?.convert(self.view.frame, from: self.view)   {
                     let intersectRect: CGRect = kbRect.intersection(viewRect)
                     if intersectRect.size.height > 0.0 {
@@ -825,11 +825,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return UITableViewAutomaticDimension
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return UITableViewAutomaticDimension
     }
     
     

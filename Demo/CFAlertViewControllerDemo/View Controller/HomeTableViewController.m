@@ -151,9 +151,12 @@
     // Create Alert
     CFAlertViewController *alert = [[CFAlertViewController alloc] initWithTitle:titleText
                                                                      titleColor:DEFAULT_TITLE_COLOR
+                                                                      titleFont:nil
                                                                         message:descText
                                                                    messageColor:DEFAULT_MESSAGE_COLOR
+                                                                   messageFont:nil
                                                                   textAlignment:[self getTextAlignment]
+                                                                    shadowColor:nil
                                                                  preferredStyle:[self getAlertStyle]
                                                                      headerView:headerView
                                                                      footerView:footerView
@@ -191,6 +194,7 @@
     // Add Default Button Action
     if (self.actionDefaultSwitch.isOn) {
         CFAlertAction *actionDefault = [[CFAlertAction alloc] initWithTitle:DEFAULT_BTN_TITLE
+                                                                        font:nil
                                                                       style:CFAlertActionStyleDefault
                                                                   alignment:[self getActionsTextAlignment]
                                                             backgroundColor:DEFAULT_BTN_COLOR
@@ -204,6 +208,7 @@
     // Add Destructive Button Action
     if (self.actionDestructiveSwitch.isOn) {
         CFAlertAction *actionDestruct = [[CFAlertAction alloc] initWithTitle:DESTRUCTIVE_BTN_TITLE
+                                                                         font:nil
                                                                        style:CFAlertActionStyleDestructive
                                                                    alignment:[self getActionsTextAlignment]
                                                              backgroundColor:DESTRUCTIVE_BTN_COLOR
@@ -217,6 +222,7 @@
     // Add Cancel Button Action
     if (self.actionCancelSwitch.isOn) {
         CFAlertAction *actionCancel = [[CFAlertAction alloc] initWithTitle:CANCEL_BTN_TITLE
+                                                                      font:nil
                                                                      style:CFAlertActionStyleCancel
                                                                  alignment:[self getActionsTextAlignment]
                                                            backgroundColor:CANCEL_BTN_COLOR

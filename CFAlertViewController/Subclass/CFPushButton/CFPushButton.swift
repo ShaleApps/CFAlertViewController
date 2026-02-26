@@ -80,6 +80,9 @@ open class CFPushButton: UIButton {
         
         // Set Default Original Transform
         originalTransform = CGAffineTransform.identity
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.numberOfLines = 2
+        titleLabel?.lineBreakMode = .byClipping
     }
     
     
